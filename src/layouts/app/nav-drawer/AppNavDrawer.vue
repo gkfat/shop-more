@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="appStore.state.drawer">
+    <v-navigation-drawer v-model="appStore.state.navDrawer">
         <AppDrawerItem />
     </v-navigation-drawer>
 </template>

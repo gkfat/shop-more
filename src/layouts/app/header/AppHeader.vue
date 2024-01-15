@@ -1,20 +1,36 @@
 <template>
-    <v-app-bar>
-        <v-app-bar-nav-icon
-            @click="appStore.toggleDrawer()"
-        />
-
-        <v-btn>
-            <v-app-bar-title
+    <v-app-bar
+        extended
+    >
+        <v-app-bar-title
+            class="text-center"
+        >
+            <v-btn
+                variant="plain"
+                class="text-h5"
                 @click="router.push('/')"
             >
                 {{ t('app.title') }}
-            </v-app-bar-title>
-        </v-btn>
+            </v-btn>
+        </v-app-bar-title>
 
-        <v-spacer />
+        <template #extension>
+            <v-app-bar-nav-icon
+                @click="appStore.toggleNavDrawer()"
+            />
 
-        <AppButtonAvatar />
+            <v-spacer />
+
+            <!-- Not login -->
+            <v-btn
+                v-if="!user"
+                variant="flat"
+                color="warning"
+                :text="t('app.button_login')"
+                @click="router.push('/login')"
+            />
+            <AppButtonAvatar />
+        </template>
     </v-app-bar>
 </template>
 
@@ -30,8 +46,8 @@ import { useAuthStore } from '@/store/auth';
 import AppButtonAvatar from './components/AppButtonAvatar.vue';
 
 const appStore = useAppStore();
-const authStore = useAuthStore();
 const router = useRouter();
+const authStore = useAuthStore();
 const { t } = useI18n();
 
 const user = computed(() => authStore.state.user);

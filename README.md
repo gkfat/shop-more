@@ -21,3 +21,12 @@ pnpm lint
 ```
 pnpm build
 ```
+
+
+## Test users
+
+|username|password|
+|-|-|
+|atuny0|9uQFF1Lh|
+|hbingley1|CQutx25i8r|
+|rshawe2|OWsTbMUgFc|

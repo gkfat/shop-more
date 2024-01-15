@@ -1,17 +1,26 @@
 {
     "app": {
-        "title": "Vue3 Template",
-        "button_logout": "登出"
+        "button_cart": "購物車",
+        "button_login": "登入",
+        "button_logout": "登出",
+        "message_greetings": "歡迎回來，",
+        "title": "ShopMore"
+    },
+    "app_setting": {
+        "section_title_theme_setting": "主題設定"
     },
     "input": {
-        "error_email_format": "信箱格式錯誤",
         "error_required": "此欄位為必填"
     },
     "login": {
         "button_login": "登入",
-        "input_label_email": "請輸入信箱",
-        "input_label_password": "請輸入密碼",
-        "message_login_fail_title": "",
+        "input_label_password": "密碼",
+        "input_label_username": "帳號",
+        "message_login_fail": "登入失敗",
         "title": "登入"
+    },
+    "theme": {
+        "darkmode": "黑暗模式",
+        "lightmode": "明亮模式"
     }
 }

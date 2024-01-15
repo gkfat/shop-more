@@ -15,11 +15,11 @@
                         <v-row>
                             <v-col>
                                 <v-text-field
-                                    v-model="form.email.value.value"
+                                    v-model="form.username.value.value"
                                     prepend-icon="mdi-account"
-                                    type="email"
-                                    :error-messages="form.email.errorMessage.value"
-                                    :label="t('login.input_label_email')"
+                                    type="text"
+                                    :error-messages="form.username.errorMessage.value"
+                                    :label="t('login.input_label_username')"
                                     autocomplete="username"
                                     hide-details="auto"
                                     variant="outlined"
@@ -42,7 +42,7 @@
                                     hide-details="auto"
                                     variant="outlined"
                                     required
-                                    @keyup.enter="submit()"
+                                    @keyup.enter="onSubmit()"
                                 />
                             </v-col>
                         </v-row>
@@ -57,7 +57,7 @@
                         block
                         :loading="loading"
                         type="submit"
-                        @click="submit()"
+                        @click="onSubmit()"
                     >
                         {{ t('login.button_login') }}
                     </v-btn>
@@ -75,21 +75,25 @@ import {
     useForm,
 } from 'vee-validate';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 import * as yup from 'yup';
 
 import { AuthService } from '@/api/auth';
+import { useAuthStore } from '@/store/auth';
 import { useNotifierStore } from '@/store/notifier';
-import { AuthLogin } from '@/types/auth';
+import { Auth } from '@/types/auth';
 
 const { t } = useI18n();
 const notifierStore = useNotifierStore();
+const authStore = useAuthStore();
+const router = useRouter();
 
 const loading = ref(false);
 
-const { handleSubmit } = useForm({
+const { handleSubmit } = useForm<Auth.Login.Request>({
     validationSchema: yup.object({
-        email: yup.string()
-            .email(t('input.error_email_format'))
+        username: yup
+            .string()
             .required(t('input.error_required')),
         password: yup
             .string()
@@ -98,31 +102,32 @@ const { handleSubmit } = useForm({
 });
 
 const form = {
-    email: useField('email'),
+    username: useField('username'),
     password: useField('password'),
 };
 
-const login = async (data: AuthLogin) => {
+const doLogin = async (data: Auth.Login.Request) => {
     try {
-        // const res = await AuthService.login(data);
+        const user = await AuthService.login(data);
 
         // set token
+        authStore.setToken(user.token);
+
         // set storage user
+        authStore.setUser(user);
+
         // change route
+        router.push('/');
     } catch (err) {
         notifierStore.error({
-            content: t('login.message_login_fail_title'),
+            content: t('login.message_login_fail'),
         });
     }
 };
 
-const submit = handleSubmit(async (data) => {
-    const { email, password } = data;
+const onSubmit = handleSubmit(async (data) => {
     loading.value = true;
-    await login({
-        email,
-        password,
-    });
+    await doLogin(data);
     loading.value = false;
 });
 </script>

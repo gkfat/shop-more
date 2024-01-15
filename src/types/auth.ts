@@ -1,14 +1,11 @@
-import { User } from './user';
+import { Users } from './user';
 
 export namespace Auth {
     export namespace Login {
         export interface Request {
-            email: string;
+            username: string;
             password: string;
         }
-        export interface Response {
-            user: User.User;
-            token: string;
-        }
+        export type Response = Users.User;
     }
 }

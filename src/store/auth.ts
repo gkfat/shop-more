@@ -2,12 +2,12 @@ import { ref } from 'vue';
 
 import { defineStore } from 'pinia';
 
-import { User } from '@/types/user';
+import { Users } from '@/types/user';
 
 export const useAuthStore = defineStore('auth', () => {
     const state = ref({
         token: null as string | null,
-        user: null as User.User | null,
+        user: null as Users.User | null,
     });
 
     const setToken = (token: string) => {
@@ -20,13 +20,13 @@ export const useAuthStore = defineStore('auth', () => {
         return token;
     };
 
-    const setUser = (user: User.User) => {
+    const setUser = (user: Users.User) => {
         localStorage.setItem('auth-user', JSON.stringify(user));
         state.value.user = user;
     };
 
     /** 從 storage 取出 user */
-    const getStorageUser = (): User.User | null => {
+    const getStorageUser = (): Users.User | null => {
         const user = localStorage.getItem('auth-user') ?? null;
 
         if (typeof user === 'string') {

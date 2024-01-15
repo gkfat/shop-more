@@ -6,7 +6,7 @@ export const installGuard = (router: Router) => {
     router.beforeEach((to, from, next) => {
         const authStore = useAuthStore();
         const { user } = authStore.state;
-        const { requiresAuth, requiresAdmin } = to.meta;
+        const { requiresAuth } = to.meta;
 
         if (to.name === '404') {
             return next();

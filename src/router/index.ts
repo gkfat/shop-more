@@ -9,21 +9,21 @@ import { installGuard } from './guard';
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/login',
-        name: 'Login',
-        meta: {
-            requiresAuth: false,
-            hidden: true,
-            title: '',
-            childAsRoot: false,
-        },
-        component: () => import('@/views/login/Login.vue'),
-    },
-    {
-        path: '/',
+        path: '',
         redirect: '/home',
         component: () => import('@/layouts/app/AppLayout.vue'),
         children: [
+            {
+                path: '/login',
+                name: 'Login',
+                meta: {
+                    requiresAuth: false,
+                    hidden: true,
+                    title: '',
+                    childAsRoot: false,
+                },
+                component: () => import('@/views/login/Login.vue'),
+            },
             {
                 path: 'home',
                 meta: {
@@ -32,6 +32,22 @@ const routes: RouteRecordRaw[] = [
                     title: 'nav.home',
                 },
                 component: () => import('@/views/home/Home.vue'),
+            },
+        ],
+    },
+    {
+        path: '/user',
+        redirect: '/user/cart',
+        component: () => import('@/layouts/app/AppLayout.vue'),
+        children: [
+            {
+                path: 'cart',
+                meta: {
+                    requiresAuth: true,
+                    hidden: true,
+                    title: '',
+                },
+                component: () => import('@/views/user/cart/Cart.vue'),
             },
         ],
     },

@@ -1,5 +1,5 @@
 <template>
     <v-container>
-        <h1>404 not found.</h1>
+        <h1>401 unauthorized.</h1>
     </v-container>
 </template>

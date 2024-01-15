@@ -5,7 +5,7 @@ import { context } from '../';
 axios.interceptors.request.use(
     (config) => {
         const authStore = context.get('authStore');
-        config.headers.Authorization = authStore.token;
+        config.headers.Authorization = `Bearer ${authStore.token}`;
         return config;
     },
     (error) => Promise.reject(error),

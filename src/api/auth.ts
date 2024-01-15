@@ -15,4 +15,11 @@ export class AuthService {
             data,
         });
     }
+
+    static async me(): Promise<Auth.Login.Response> {
+        return agent({
+            method: 'get',
+            url: ApiRoutes.auth.me,
+        });
+    }
 }

@@ -18,6 +18,6 @@ export const i18n = createI18n({
     legacy: false,
     globalInjection: false,
     locale: 'zh',
-    fallbackLocale: 'en',
+    fallbackLocale: 'zh',
     messages: loadLocaleMessages(),
 });

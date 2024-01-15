@@ -1,6 +1,6 @@
 <template>
     <PageContent>
-        <h1>Home</h1>
+        <h1>cart</h1>
     </PageContent>
 </template>
 

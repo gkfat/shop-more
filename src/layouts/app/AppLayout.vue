@@ -2,6 +2,7 @@
     <v-layout>
         <AppHeader />
         <AppNavDrawer />
+        <AppSettingDrawer />
         <v-main>
             <router-view />
         </v-main>
@@ -11,4 +12,6 @@
 <script lang="ts" setup>
 import AppHeader from '@/layouts/app/header/AppHeader.vue';
 import AppNavDrawer from '@/layouts/app/nav-drawer/AppNavDrawer.vue';
+import AppSettingDrawer
+    from '@/layouts/app/setting-drawer/AppSettingDrawer.vue';
 </script>
